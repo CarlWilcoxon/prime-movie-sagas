@@ -16,18 +16,26 @@ import Box from '@material-ui/core/Box';
 // })
 
 class Details extends Component {
-  // Renders the entire app on the DOM
+
+  componentDidMount() {
+    this.getDetails();
+  }
+
+  getDetails = () => {
+    this.props.dispatch( { type: 'FETCH_DETAILS', payload: this.props.match.params.id} );
+    console.log(this.props.reduxState.details);
+  }
+
   render() {
     // brings in Material UI styles
     // const {classes} = this.props;
 
     return (
       <>
-          <Slide direction="left" in={true} timeout={250} mountOnEnter unmountOnExit>
-      <Box className="Details" component="div">
-        <p>{this.props.match.params.id} Page</p>
-
-      </Box>
+      <Slide direction="left" in={true} timeout={250} mountOnEnter unmountOnExit>
+        <Box className="Details" component="div">
+          <p>{this.props.match.params.id} Page</p>
+        </Box>
       </Slide>
       </>
     );
