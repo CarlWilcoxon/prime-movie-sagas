@@ -14,15 +14,24 @@ import Paper from '@material-ui/core/Paper';
 // })
 
 class MovieItem extends Component {
-  // Renders the entire app on the DOM
+
+
+  // Setup the click handler
+  clickHandler = () => {
+    console.log(this.props);
+    // Take the user to the corresponding details page
+    this.props.history.push('/details/' + this.props.movie.id);
+  }
+  // Renders this component
   render() {
+
     // brings in Material UI styles
     // const {classes} = this.props;
 
     return (
       <>
       <Paper className="MovieItem" component="div">
-      <img src={this.props.movie.poster} alt={this.props.movie.title + 'poster'} />
+      <img src={this.props.movie.poster} onClick={this.clickHandler} alt={this.props.movie.title + ' poster'} />
         <p>{this.props.movie.title}</p>
         <p>{this.props.movie.description}</p>
       </Paper>

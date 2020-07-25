@@ -23,7 +23,8 @@ class Details extends Component {
     return (
       <>
       <Box className="Details" component="div">
-        <p>Empty Page</p>
+        <p>{this.props.match.params.id} Page</p>
+
       </Box>
       </>
     );
