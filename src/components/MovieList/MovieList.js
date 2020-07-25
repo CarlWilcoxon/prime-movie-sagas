@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MovieItem from '../MovieItem/MovieItem';
+import Slide from '@material-ui/core/Slide';
+
 
 // import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -17,12 +19,10 @@ import Grid from '@material-ui/core/Grid';
 // })
 
 class MovieList extends Component {
-  // Renders the entire app on the DOM
 
   componentDidMount(){
     this.props.dispatch({type: 'FETCH_MOVIES'})
   }
-
 
   render() {
     // brings in Material UI styles
@@ -30,6 +30,8 @@ class MovieList extends Component {
 
     return (
       <>
+    <Slide direction="left" in={true} timeout={250} mountOnEnter unmountOnExit>
+
       <Box className="MovieList" component="div">
         <p>MovieList Page</p>
         <Grid
@@ -41,10 +43,14 @@ class MovieList extends Component {
            <Grid item xs={12}>
              {/* map through all the movies */}
              {this.props.reduxState.movies.map( movie =>
-             <MovieItem key={movie.id} movie={movie}/>)}
+             <MovieItem
+              key={movie.id}
+              history={this.props.history}
+              movie={movie}/>)}
            </Grid>
         </Grid>
       </Box>
+    </Slide>
       </>
     );
   }
