@@ -17,8 +17,7 @@ class MovieItem extends Component {
 
 
   // Setup the click handler
-  clickHandler = () => {
-    console.log(this.props);
+  clickHandler = () => {;
     // Take the user to the corresponding details page
     this.props.history.push('/details/' + this.props.movie.id);
   }
@@ -31,7 +30,11 @@ class MovieItem extends Component {
     return (
       <>
       <Paper className="MovieItem" component="div">
-      <img src={this.props.movie.poster} onClick={this.clickHandler} alt={this.props.movie.title + ' poster'} />
+      <img
+      src={this.props.movie.poster}
+      onClick={this.clickHandler}
+      alt={this.props.movie.title + ' poster'} />
+
         <p>{this.props.movie.title}</p>
         <p>{this.props.movie.description}</p>
       </Paper>

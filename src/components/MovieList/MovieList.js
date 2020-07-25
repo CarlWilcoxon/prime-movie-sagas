@@ -19,7 +19,6 @@ import Grid from '@material-ui/core/Grid';
 // })
 
 class MovieList extends Component {
-  // Renders the entire app on the DOM
 
   componentDidMount(){
     this.props.dispatch({type: 'FETCH_MOVIES'})
@@ -31,7 +30,7 @@ class MovieList extends Component {
 
     return (
       <>
-    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+    <Slide direction="left" in={true} timeout={250} mountOnEnter unmountOnExit>
 
       <Box className="MovieList" component="div">
         <p>MovieList Page</p>
@@ -44,7 +43,10 @@ class MovieList extends Component {
            <Grid item xs={12}>
              {/* map through all the movies */}
              {this.props.reduxState.movies.map( movie =>
-             <MovieItem key={movie.id} history={this.props.history} movie={movie}/>)}
+             <MovieItem
+              key={movie.id}
+              history={this.props.history}
+              movie={movie}/>)}
            </Grid>
         </Grid>
       </Box>

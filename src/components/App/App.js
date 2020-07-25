@@ -20,17 +20,12 @@ class App extends Component {
             <Link to = "/">
               <Button color = "primary"> Home </Button>
             </Link>
-            {/* {'\u00A0'}{'\u00A0'}
-            <Link to = "/details">
-              <Button color = "primary"> Details </Button>
-            </Link> */}
-
           </nav>
 
           <p>Movie Database App</p>
             <div>
-              <Route exact path="/" component={MovieList}/>
-              <Route exact path="/details/:id" component={Details}/>
+              <Route exact path="/" component={MovieList} />
+              <Route exact path="/details/:id" component={Details} />
             </div>
         </Router>
       </Container>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Slide from '@material-ui/core/Slide';
 
 // import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -22,10 +23,12 @@ class Details extends Component {
 
     return (
       <>
+          <Slide direction="left" in={true} timeout={250} mountOnEnter unmountOnExit>
       <Box className="Details" component="div">
         <p>{this.props.match.params.id} Page</p>
 
       </Box>
+      </Slide>
       </>
     );
   }
