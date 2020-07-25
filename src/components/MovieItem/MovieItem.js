@@ -22,7 +22,9 @@ class MovieItem extends Component {
     return (
       <>
       <Paper className="MovieItem" component="div">
-        {this.props.movie.title}
+      <img src={this.props.movie.poster} alt={this.props.movie.title + 'poster'} />
+        <p>{this.props.movie.title}</p>
+        <p>{this.props.movie.description}</p>
       </Paper>
       </>
     );
