@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import App from './components/App/App.js';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -14,11 +15,21 @@ import { takeEvery, put } from 'redux-saga/effects';
 
 // Create the rootSaga generator function
 function* rootSaga() {
-  // yield takeEvery('FETCH_MOVIES', fetchMovies );
+  yield takeEvery('FETCH_MOVIES', fetchMovies );
 }
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
+
+// Used to get movies from the server
+function* fetchMovies() {
+  try{
+    const response = yield axios.get('/movies');
+    yield put({type:'SET_MOVIES', payload: response.data});
+  }catch (error){
+    console.log('Problem getting movies from server', error);
+  }
+}
 
 // Used to store movies returned from the server
 const movies = (state = [], action) => {

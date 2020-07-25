@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 // import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 // import PropTypes from 'prop-types';
@@ -12,7 +14,7 @@ import Box from '@material-ui/core/Box';
 //   }
 // })
 
-class _template extends Component {
+class Details extends Component {
   // Renders the entire app on the DOM
   render() {
     // brings in Material UI styles
@@ -20,7 +22,7 @@ class _template extends Component {
 
     return (
       <>
-      <Box className="_template" component="div">
+      <Box className="Details" component="div">
         <p>Empty Page</p>
       </Box>
       </>
@@ -29,8 +31,14 @@ class _template extends Component {
 }
 
 
-// _template.propTypes = {
+const mapStateToProps = reduxState => ({
+  reduxState,
+});
+
+export default connect(mapStateToProps)(Details);
+
+// Details.propTypes = {
 //   classes: PropTypes.object.isRequired
 // };
 
-// export default withStyles(styles)(_template);
+// export default withStyles(styles)(Details);
