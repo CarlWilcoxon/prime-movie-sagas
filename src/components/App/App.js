@@ -8,6 +8,7 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 // import modules for routes
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
+import SimpleSlide from '../SimpleSlide/SimpleSlide';
 
 class App extends Component {
   // Renders the entire app on the DOM
@@ -29,6 +30,7 @@ class App extends Component {
           </nav>
 
           <p>Movie Database App</p>
+          <SimpleSlide />
         <div>
           <Route exact path="/" component={MovieList}/>
           <Route exact path="/Details" component={Details}/>
@@ -41,3 +43,4 @@ class App extends Component {
 }
 
 export default App;
+

@@ -25,7 +25,7 @@ We'll be able to see movies that exist in our DB. We'll also be able to see deta
 
 ### Genres
 We've given you some starter genres in the database. Feel free to change or add some with Postico.
- 
+
 ### Movies
 We've added some movie posters in the `public/images` folder, and the database is set up to use them.
 
@@ -72,7 +72,7 @@ The edit page should have the buttons:
 As one of your last projects, it's possible you will be sharing this with employers, so be sure to follow best practices and make it look good!
 
 - [ ] Invest some time in styling it up!
-    - [ ] Research grids for your movie posters on the Movie List page
+    - [x] Research grids for your movie posters on the Movie List page
     - [ ] Add route change animations
 - [ ] Commit your code frequently! You should have at 15+ commits on a project of this size. Use branches to help break down your features.
 - [ ] Comment your code.
