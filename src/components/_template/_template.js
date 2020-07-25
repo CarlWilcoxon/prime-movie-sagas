@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import PropTypes from 'prop-types';
+// import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+// import PropTypes from 'prop-types';
 // import { withStyles } from 'material-ui/styles';
 // const styles = theme => ({
 //   root: {
@@ -21,10 +21,9 @@ class _template extends Component {
 
     return (
       <>
-      <CssBaseline />
-      <Container className="App">
+      <Box className="_template" component="div">
         <p>Empty Page</p>
-      </Container>
+      </Box>
       </>
     );
   }
