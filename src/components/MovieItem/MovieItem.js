@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 // import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 // import PropTypes from 'prop-types';
 // import { withStyles } from 'material-ui/styles';
 // const styles = theme => ({
@@ -12,7 +13,7 @@ import Box from '@material-ui/core/Box';
 //   }
 // })
 
-class _template extends Component {
+class MovieItem extends Component {
   // Renders the entire app on the DOM
   render() {
     // brings in Material UI styles
@@ -20,17 +21,23 @@ class _template extends Component {
 
     return (
       <>
-      <Box className="_template" component="div">
-        <p>Empty Page</p>
-      </Box>
+      <Paper className="MovieItem" component="div">
+        {this.props.movie.title}
+      </Paper>
       </>
     );
   }
 }
 
 
-// _template.propTypes = {
+const mapStateToProps = reduxState => ({
+  reduxState,
+});
+
+export default connect(mapStateToProps)(MovieItem);
+
+// MovieItem.propTypes = {
 //   classes: PropTypes.object.isRequired
 // };
 
-// export default withStyles(styles)(_template);
+// export default withStyles(styles)(MovieItem);
