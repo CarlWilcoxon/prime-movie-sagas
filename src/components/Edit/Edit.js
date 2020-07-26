@@ -22,35 +22,17 @@ class Edit extends Component {
     this.getGenres();
   }
 
-  // If details/genres loaded, then update the state with them, otherwise do nothing
-  componentDidUpdate() {
-    if( this.state.titleValue === ''
-    && this.state.descriptionValue === ''
-    && this.state.genresValue === [] ){
-      // update movie details
-      this.setState({
-        ...this.state,
-        titleValue: ((this.props.reduxState.details.length > 0)? this.props.details.title : '' ),
-        descriptionValue: ((this.props.reduxState.details.length > 0)? this.props.details.description : '' ),
-        genresValue: ((this.props.reduxState.details.length > 0)? this.props.details.genres : [] ),
-        });
-    } else if (this.state.genresList === []) {
-        // update genreList
-        this.setState({
-          ...this.state,
-          genresList: ((this.props.reduxState.genres.length > 0)? this.props.reduxState.genres : '' ),
-        });
-    }
-  }
-
+  // Go back to the details page if they click cancel
   cancelClick = () => {
     this.props.history.push('/details/' + this.props.match.params.id);
   }
 
   // Setup change handler for the textboxes
   changeHandler = ( propertyName ) => (event) =>{
+    console.log(this.state);
     this.setState({
-      [propertyName]: event.target.value
+      ...this.state,
+      [propertyName]: event.target.value,
     });
   }
 
@@ -62,11 +44,13 @@ class Edit extends Component {
     this.props.dispatch( { type: 'FETCH_GENRES', payload: this.props.match.params.id} );
   }
 
+
+  // Save the new values unless they are blank, then save the defaults.
   saveClick = () => {
     this.props.dispatch( { type: 'SAVE_DETAILS', payload: {
       id: this.props.match.params.id,
-      title: this.state.titleValue,
-      description: this.state.descriptionValue,
+      title: (this.state.titleValue==='' ? this.props.details.title : this.state.titleValue),
+      description: (this.state.descriptionValue==='' ? this.props.details.description : this.state.descriptionValue),
     }})
     this.props.history.push('/details/' + this.props.match.params.id);
   }
@@ -157,7 +141,7 @@ class Edit extends Component {
           </Slide>
         :
             // render if the details don't load
-          <Typography paragraph>Page failed to load, please refresh.</Typography>
+          <Typography paragraph>Page is loading please wait...</Typography>
         }
       </>
     );
