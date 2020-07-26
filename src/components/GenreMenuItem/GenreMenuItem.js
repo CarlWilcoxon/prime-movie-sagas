@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, List, ListItem, ListItemText, Menu, MenuItem, Typography } from '@material-ui/core';
+import {  MenuItem } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import styles from '../../styles/MovieTheme';
-import GenreMenuItem from '../GenreMenuItem/GenreMenuItem';
 
-class GenreMenu extends Component {
+class GenreMenuItem extends Component {
   state = {
-    anchorEl: null,
     leftoverGenres: null,
   };
 
@@ -45,35 +43,13 @@ class GenreMenu extends Component {
 
     return (
       <>
-        <div>
-          {/* map through currently selected genres */}
-        <List>
-          <ListItem
-            button
-            aria-haspopup="true"
-            aria-controls="genre-menu"
-            aria-label="When device is locked"
-            onClick={this.handleClickListItem}
-          >
-            <ListItemText
-              primary={this.props.genresList[this.state.selectedIndex]}
-            />
-          </ListItem>
-        </List>
-        <Menu
-          id="genre-menu"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
-          { (this.state.leftoverGenres === null) ?
-          <MenuItem>Error</MenuItem>
-          :
-          this.state.leftoverGenres.map((newGenre, index) => (
-            <GenreMenuItem key={newGenre} newGenre={newGenre} index={index} />
-          ))}
-        </Menu>
-      </div>
+      <MenuItem
+        disabled={this.props.index === 0}
+        selected={this.props.index === this.state.selectedIndex}
+        onClick={event => this.handleMenuItemClick(event, this.props.index)}
+      >
+        {this.props.newGenre}
+      </MenuItem>
       </>
     );
   }
@@ -88,9 +64,11 @@ const mapStateToProps = reduxState => ({
 });
 
 // Helps bring in custom Material UI themes
-GenreMenu.propTypes = {
+GenreMenuItem.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 
-export default withStyles(styles)(connect(mapStateToProps)(GenreMenu));
+export default withStyles(styles)(connect(mapStateToProps)(GenreMenuItem));
+
+

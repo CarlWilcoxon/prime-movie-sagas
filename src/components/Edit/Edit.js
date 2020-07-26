@@ -4,7 +4,7 @@ import { Button, FormControl, Grid, Paper, Slide, TextField, Typography } from '
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import styles from '../../styles/MovieTheme';
-import GenreMenu from '../GenreMenu/GenreMenu';
+// import GenreMenu from '../GenreMenu/GenreMenu';
 
 class Edit extends Component {
 
@@ -43,9 +43,9 @@ class Edit extends Component {
     }
   }
 
-  // cancelClick = () => {
-
-  // }
+  cancelClick = () => {
+    this.props.history.push('/details/' + this.props.match.params.id);
+  }
 
   // Setup change handler for the textboxes
   changeHandler = ( propertyName ) => (event) =>{
@@ -62,9 +62,14 @@ class Edit extends Component {
     this.props.dispatch( { type: 'FETCH_GENRES', payload: this.props.match.params.id} );
   }
 
-  // saveClick = () => {
-
-  // }
+  saveClick = () => {
+    this.props.dispatch( { type: 'SAVE_DETAILS', payload: {
+      id: this.props.match.params.id,
+      title: this.state.titleValue,
+      description: this.state.descriptionValue,
+    }})
+    this.props.history.push('/details/' + this.props.match.params.id);
+  }
 
 
   render() {
@@ -82,16 +87,23 @@ class Edit extends Component {
           <Slide direction="left" in={true} timeout={370} mountOnEnter unmountOnExit>
             <Paper className={classes.paper} component="div">
               <FormControl
-              fullWidth>
-
+                fullWidth
+                component={Grid}
+                container
+                spacing={1}
+              >
                 <Grid item>
-                  <TextField
-                  variant="outlined"
-                  label="Title"
-                  onChange={this.changeHandler('titleValue')}
-                  defaultValue={this.props.details.title}
-                  />
+                  <Grid container>
+                    <Grid item
+                      component={TextField}
+                      variant="outlined"
+                      label="Title"
+                      onChange={this.changeHandler('titleValue')}
+                      defaultValue={this.props.details.title}
+                    />
+                  </Grid>
                 </Grid>
+                <Grid item>
                   <TextField
                     fullWidth
                     multiline
@@ -99,45 +111,43 @@ class Edit extends Component {
                     label="Description"
                     onChange={this.changeHandler('descriptionValue')}
                     defaultValue={this.props.details.description}
-                    />
+                  />
+                </Grid>
                 <Grid
                   container
                   justify="space-between"
-                  align="flex-end">
+                  align="flex-end"
+                  spacing={1}
+                  >
                   <Grid item>
+                    <Typography variant={'subtitle2'}>
+                      {this.props.details.genres.map((genre) =>
+                        // conditional rendering to deal with the last entry in the list
+                        (this.props.details.genres.indexOf(genre) === this.props.details.genres.length-1)
+                      ?
+                          // last entry
+                          genre + '.'
+                      :
+                          // not the last entry
+                          genre + ', ')}
+                    </Typography>
+                  </Grid>
+                  {/* <Grid item>
                     <GenreMenu
                           genresValue={this.props.details.genres}
                           genresList={this.props.reduxState.genres}
                           /> taco
-                    {/* <Typography variant={'subtitle2'}>
-                      {this.props.details.genres.map((genre) =>
-                        // Conditional rendering to deal with the last entry in the list
-                        // Make a menu for each item, but
-                        (this.props.details.genres.indexOf(genre) === this.props.details.genres.length-1)
-                      ?
-                          // last entry
-                          <GenreMenu
-                          genre={genre}
-                          isLast={true}
-                          genresList={this.state.genresList} />
-                      :
-                          // not the last entry
-                          <GenreMenu
-                          genreValue={genre}
-                          isLast={false}
-                          genresList={this.state.genresList} /> )}
-                    </Typography> */}
-                  </Grid>
+                  </Grid> */}
                   <Grid item>
                     <Grid
                       container
                       spacing={1}
                       >
                       <Grid item>
-                        <Button onClick={this.saveEdit} variant={"contained"} color={"primary"}>Save</Button>
+                        <Button onClick={this.saveClick} variant={"contained"} color={"primary"}>Save</Button>
                       </Grid>
                       <Grid item>
-                        <Button onClick={this.cancelEdit} variant={"outlined"} color={"secondary"}>Cancel</Button>
+                        <Button onClick={this.cancelClick} variant={"outlined"} color={"secondary"}>Cancel</Button>
                       </Grid>
                     </Grid>
                   </Grid>

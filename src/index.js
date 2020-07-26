@@ -18,6 +18,7 @@ function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchMovies );
   yield takeEvery('FETCH_DETAILS', fetchDetails );
   yield takeEvery('FETCH_GENRES', fetchGenres );
+  yield takeEvery('SAVE_DETAILS', putDetails );
 }
 
 // Create sagaMiddleware
@@ -33,6 +34,16 @@ function* fetchDetails(action) {
   }
 }
 
+// Used to get an array of all genres
+function* fetchGenres() {
+  try{
+    const response = yield axios.get('/genres');
+    yield put({type: 'SET_GENRES', payload: response.data});
+  }catch (error){
+    console.log('Problem getting movies from server', error);
+  }
+}
+
 // Used to get movies from the server
 function* fetchMovies() {
   try{
@@ -43,16 +54,17 @@ function* fetchMovies() {
   }
 }
 
-// Used to get an array of all genres
-function* fetchGenres() {
+// Used to update details about a specific movie from the server
+// Then updates the details stored on client side
+function* putDetails(action) {
   try{
-    const response = yield axios.get('/genres/');
-    yield put({type: 'SET_GENRES', payload: response.data});
+    yield axios.put('/details/' + action.payload.id, action.payload);
+    const response = yield axios.get('/details/' + action.payload.id);
+    yield put({type: 'SET_DETAILS', payload: response.data});
   }catch (error){
     console.log('Problem getting movies from server', error);
   }
 }
-
 
 
 
