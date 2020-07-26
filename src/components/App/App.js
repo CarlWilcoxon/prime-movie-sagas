@@ -3,10 +3,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import 'fontsource-roboto';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
+
 // import modules for routes
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
+import Feed from '../Bob/Bob';
 
 class App extends Component {
   // Renders the entire app on the DOM
@@ -22,10 +25,11 @@ class App extends Component {
             </Link>
           </nav>
 
-          <p>Movie Database App</p>
+          <Typography paragraph>Movie Database App</Typography>
             <div>
               <Route exact path="/" component={MovieList} />
               <Route exact path="/details/:id" component={Details} />
+              <Route path='/BOB' component={Feed}/>
             </div>
         </Router>
       </Container>

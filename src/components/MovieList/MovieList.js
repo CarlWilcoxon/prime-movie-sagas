@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MovieItem from '../MovieItem/MovieItem';
-import Slide from '@material-ui/core/Slide';
+import { Box, Grid, Slide } from '@material-ui/core';
+import styles from '../../styles/MovieTheme';
 
 
 // import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-// import PropTypes from 'prop-types';
-// import { withStyles } from 'material-ui/styles';
-// const styles = theme => ({
-//   root: {
-//     //
-//   },
-//   flex: {
-//     flex: 1
-//   }
-// })
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/styles';
 
 class MovieList extends Component {
 
@@ -26,14 +17,13 @@ class MovieList extends Component {
 
   render() {
     // brings in Material UI styles
-    // const {classes} = this.props;
+    const {classes} = this.props;
 
     return (
       <>
     <Slide direction="left" in={true} timeout={250} mountOnEnter unmountOnExit>
 
-      <Box className="MovieList" component="div">
-        <p>MovieList Page</p>
+      <Box className={classes.root} component="div">
         <Grid
           container
           direction="column"
@@ -56,16 +46,12 @@ class MovieList extends Component {
   }
 }
 
+MovieList.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
 const mapStateToProps = reduxState => ({
   reduxState,
 });
 
-export default connect(mapStateToProps)(MovieList);
-
-
-// MovieList.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
-
-// export default withStyles(styles)(MovieList);
+export default withStyles(styles)(connect(mapStateToProps)(MovieList));
