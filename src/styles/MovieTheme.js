@@ -1,6 +1,4 @@
 const styles = theme => ({
-  root: {
-  },
   paper: {
     align: 'center',
     padding: '1.5rem',

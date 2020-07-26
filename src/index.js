@@ -17,29 +17,55 @@ import { takeEvery, put } from 'redux-saga/effects';
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', fetchMovies );
   yield takeEvery('FETCH_DETAILS', fetchDetails );
+  yield takeEvery('FETCH_GENRES', fetchGenres );
+  yield takeEvery('SAVE_DETAILS', putDetails );
 }
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
-// Used to get movies from the server
-function* fetchMovies() {
+// Used to get details about specific movies from the server
+function* fetchDetails(action) {
   try{
-    const response = yield axios.get('/movies');
-    yield put({type:'SET_MOVIES', payload: response.data});
+    const response = yield axios.get('/details/' + action.payload);
+    yield put({type: 'SET_DETAILS', payload: response.data});
   }catch (error){
     console.log('Problem getting movies from server', error);
   }
 }
 
-function* fetchDetails(action) {
+// Used to get an array of all genres
+function* fetchGenres() {
   try{
-    const response = yield axios.get('/details/' + action.payload);
-    yield put({type:'SET_DETAILS', payload: response.data});
+    const response = yield axios.get('/genres');
+    yield put({type: 'SET_GENRES', payload: response.data});
   }catch (error){
     console.log('Problem getting movies from server', error);
   }
 }
+
+// Used to get movies from the server
+function* fetchMovies() {
+  try{
+    const response = yield axios.get('/movies');
+    yield put({type: 'SET_MOVIES', payload: response.data});
+  }catch (error){
+    console.log('Problem getting movies from server', error);
+  }
+}
+
+// Used to update details about a specific movie from the server
+// Then updates the details stored on client side
+function* putDetails(action) {
+  try{
+    yield axios.put('/details/' + action.payload.id, action.payload);
+    const response = yield axios.get('/details/' + action.payload.id);
+    yield put({type: 'SET_DETAILS', payload: response.data});
+  }catch (error){
+    console.log('Problem getting movies from server', error);
+  }
+}
+
 
 
 // Used to store movies returned from the server

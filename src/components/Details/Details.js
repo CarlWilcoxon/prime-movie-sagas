@@ -18,7 +18,8 @@ class Details extends Component {
   }
 
   editDetails = () => {
-    this.props.history.push('/edit/' + this.props.details.id);
+    console.log(this.props);
+    this.props.history.push('/edit/' + this.props.match.params.id);
   }
 
   render() {

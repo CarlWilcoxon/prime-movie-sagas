@@ -27,4 +27,26 @@ router.get('/:id', (req, res) => {
         });
 });
 
+router.put('/:id', (req, res) => {
+  // return all genres
+  const queryText = `UPDATE movies
+                    SET title=$1,
+                    description=$2
+                    WHERE ID=$3`;
+  const queryValues = [
+    req.body.title,
+    req.body.description,
+    req.body.id,
+  ]
+  pool.query(queryText, queryValues)
+      .then( (result) => {
+          res.sendStatus(200);
+      })
+      .catch( (error) => {
+          console.log(`Error on query ${error}`);
+          res.sendStatus(500);
+      });
+});
+
+
 module.exports = router;
