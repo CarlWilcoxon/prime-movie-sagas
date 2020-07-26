@@ -9,30 +9,30 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 // import modules for routes
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
-import Feed from '../Bob/Bob';
+import Edit from '../Edit/Edit';
 
 class App extends Component {
   // Renders the entire app on the DOM
   render() {
     return (
       <>
-      <CssBaseline />
-      <Container className="App">
-        <Router>
-          <nav>
-            <Link to = "/">
-              <Button color = "primary"> Home </Button>
-            </Link>
-          </nav>
+        <CssBaseline />
+        <Container className="App">
+          <Router>
+            <nav>
+              <Link to = "/">
+                <Button color="primary"> Home </Button>
+              </Link>
+            </nav>
 
-          <Typography paragraph>Movie Database App</Typography>
-            <div>
-              <Route exact path="/" component={MovieList} />
-              <Route exact path="/details/:id" component={Details} />
-              <Route path='/BOB' component={Feed}/>
-            </div>
-        </Router>
-      </Container>
+            <Typography paragraph>Movie Database App</Typography>
+              <div>
+                <Route exact path="/" component={MovieList} />
+                <Route exact path="/details/:id" component={Details} />
+                <Route path="/edit/:id" component={Edit} />
+              </div>
+          </Router>
+        </Container>
       </>
     );
   }

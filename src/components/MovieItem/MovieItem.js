@@ -14,6 +14,7 @@ class MovieItem extends Component {
     // Take the user to the corresponding details page
     this.props.history.push('/details/' + this.props.movie.id);
   }
+
   // Renders this component
   render() {
 

@@ -1,6 +1,4 @@
-import { createMuiTheme } from '@material-ui/core'
-
-const styles = createMuiTheme => ({
+const styles = theme => ({
   root: {
   },
   paper: {
@@ -8,6 +6,6 @@ const styles = createMuiTheme => ({
     padding: '1.5rem',
     marginTop: '1rem',
   },
-})
+});
 
 export default styles;
